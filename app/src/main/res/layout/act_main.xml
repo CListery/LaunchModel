@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="CLOSE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnLoadAppTaskInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1" />
+
+    <Button
+        android:id="@+id/btnLoadAppTaskInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="APP TASK"
+        app:layout_constraintBottom_toBottomOf="@id/btnClose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnClose"
+        app:layout_constraintTop_toTopOf="@id/btnClose" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollShower"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:background="#333"
+        app:layout_constraintBottom_toTopOf="@id/btnOpenStandard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <TextView
+            android:id="@+id/txtShower"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textColor="#FFF"
+            android:textSize="16dp"
+            tools:text="info" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/btnOpenStandard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="STANDARD"
+        app:layout_constraintBottom_toTopOf="@id/btnOpenSingleTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollShower" />
+
+    <Button
+        android:id="@+id/btnOpenSingleTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="SINGLE TASK"
+        app:layout_constraintBottom_toTopOf="@id/btnOpenSingleTop"
+        app:layout_constraintEnd_toStartOf="@id/btnOpenSingleTask2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnOpenStandard" />
+
+    <Button
+        android:id="@+id/btnOpenSingleTask2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SINGLE TASK 2"
+        app:layout_constraintBottom_toBottomOf="@id/btnOpenSingleTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnOpenSingleTask"
+        app:layout_constraintTop_toTopOf="@id/btnOpenSingleTask" />
+
+    <Button
+        android:id="@+id/btnOpenSingleTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="SINGLE TOP"
+        app:layout_constraintBottom_toTopOf="@id/btnOpenSingleInstance"
+        app:layout_constraintEnd_toStartOf="@id/btnOpenSingleTop2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnOpenSingleTask" />
+
+    <Button
+        android:id="@+id/btnOpenSingleTop2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SINGLE TOP 2"
+        app:layout_constraintBottom_toBottomOf="@id/btnOpenSingleTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnOpenSingleTop"
+        app:layout_constraintTop_toTopOf="@id/btnOpenSingleTop" />
+
+    <Button
+        android:id="@+id/btnOpenSingleInstance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="SINGLE INSTANCE"
+        app:layout_constraintBottom_toTopOf="@id/txtMoveTaskToBack"
+        app:layout_constraintEnd_toStartOf="@id/btnOpenSingleInstance2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnOpenSingleTop" />
+
+    <Button
+        android:id="@+id/btnOpenSingleInstance2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SINGLE INSTANCE 2"
+        app:layout_constraintBottom_toBottomOf="@id/btnOpenSingleInstance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnOpenSingleInstance"
+        app:layout_constraintTop_toTopOf="@id/btnOpenSingleInstance" />
+
+    <TextView
+        android:id="@+id/txtMoveTaskToBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="MoveTaskToBack"
+        android:textColor="#232425"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnMoveTaskToBackYES"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnOpenSingleInstance" />
+
+    <Button
+        android:id="@+id/btnMoveTaskToBackYES"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRUE"
+        app:layout_constraintBottom_toBottomOf="@id/txtMoveTaskToBack"
+        app:layout_constraintEnd_toStartOf="@id/btnMoveTaskToBackNO"
+        app:layout_constraintStart_toEndOf="@id/txtMoveTaskToBack"
+        app:layout_constraintTop_toTopOf="@id/txtMoveTaskToBack" />
+
+    <Button
+        android:id="@+id/btnMoveTaskToBackNO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="FALSE"
+        app:layout_constraintBottom_toBottomOf="@id/txtMoveTaskToBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnMoveTaskToBackYES"
+        app:layout_constraintTop_toTopOf="@id/txtMoveTaskToBack" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

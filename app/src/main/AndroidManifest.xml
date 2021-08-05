@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.launchmode">
+
+    <application
+        android:name=".APP"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LaunchMode">
+
+        <activity
+            android:name=".MainAct"
+            android:alwaysRetainTaskState="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".StandardAct"
+            android:launchMode="standard" />
+        <activity
+            android:name=".SingleTaskAct"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".SingleTaskAct2"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".SingleTopAct"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".SingleTopAct2"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".SingleInstanceAct"
+            android:autoRemoveFromRecents="true"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":one" />
+        <activity
+            android:name=".SingleInstanceAct2"
+            android:autoRemoveFromRecents="true"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":one2" />
+    </application>
+
+</manifest>
