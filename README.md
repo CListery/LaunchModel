@@ -120,3 +120,27 @@
   11:47:44.998 W/MainAct[35dcb66]: Close
   11:47:45.650 D/MainAct[35dcb66]: onDestroy
   ```
+
+## Other
+
+### autoRemoveFromRecents
+
+* 为 true 时，当 activity 销毁后自动从任务栈中移除
+
+### taskAffinity
+
+* 指定该 activity 所在的任务栈名称。 与应用程序标签（默认为应用程序中的所有 activity 的任务栈名）或 activity 标签（为该组件提供特定关联）一起使用。
+* 此属性的默认值与包名称相同，表明清单中的所有活动通常应被视为用户的单个“应用程序”。 您可以使用此属性来修改该行为：如果从用户的角度来看 activity 旨在成为该任务的一部分，则为他们提供与另一个 activity 的关联，或者为与任务没有关联的活动使用空字符串。
+
+### alwaysRetainTaskState
+
+* 当任务栈进入后台长时间未恢复时，系统会自动将其回收并重置为初始状态（从堆栈中删除所有 activity 并重置 root activity）。若将该属性设置为 true，可以让其所在的任务栈保留状态。
+
+### clearTaskOnLaunch
+
+* 与 alwaysRetainTaskState 指定从主屏幕重新启动活动时是否应清除活动的任务。结果，每次用户启动任务时，他们都会被带到它的根活动，无论他们上次是使用 BACK 还是 HOME 离开它。此标志仅适用于用于启动新任务根的活动。
+
+### finishOnTaskLaunch
+
+* 通过从主屏幕重新启动将其任务置于前台时，指定是否应 finish 该 activity。
+* 如果此选项和 allowTaskReparenting 都被指定，则 allowTaskReparenting 将被忽略
