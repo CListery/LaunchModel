@@ -2,6 +2,7 @@ package com.example.launchmode
 
 import android.app.ActivityManager
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -96,7 +97,7 @@ open class MainAct : BaseAct<ActMainBinding>() {
 
     override fun onStart() {
         super.onStart()
-        log("onStart")
+        log("onStart: $isChangingConfigurations")
     }
 
     override fun onRestart() {
@@ -115,10 +116,20 @@ open class MainAct : BaseAct<ActMainBinding>() {
         log("onResume")
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        log("onConfigurationChanged")
+    }
+
     override fun onPause() {
         log("onPause")
         logViewModel.logInfo.removeObservers(mAct)
         super.onPause()
+    }
+
+    override fun onStop() {
+        log("onStop: $isChangingConfigurations")
+        super.onStop()
     }
 
     override fun onDestroy() {
