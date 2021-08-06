@@ -4,13 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import java.io.Serializable
 
+private val sLogInfo: LogInfo by lazy { LogInfo() }
+
 class LogViewModel : ViewModel() {
-
-    companion object {
-        @JvmStatic
-        val sLogInfo: LogInfo by lazy { LogInfo() }
-    }
-
     val logInfo = sLogInfo
 }
 
