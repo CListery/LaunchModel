@@ -14,16 +14,16 @@
         android:layout_marginBottom="20dp"
         android:text="CLOSE"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnLoadAppTaskInfo"
+        app:layout_constraintEnd_toStartOf="@id/btnLoadTopActInfo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1" />
 
     <Button
-        android:id="@+id/btnLoadAppTaskInfo"
+        android:id="@+id/btnLoadTopActInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="APP TASK"
+        android:text="TOP ACT"
         app:layout_constraintBottom_toBottomOf="@id/btnClose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnClose"
@@ -32,9 +32,10 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollShower"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
         android:background="#333"
         app:layout_constraintBottom_toTopOf="@id/btnOpenStandard"
+        app:layout_constraintDimensionRatio="w,16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -56,12 +57,25 @@
         android:id="@+id/btnOpenStandard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:text="STANDARD"
         app:layout_constraintBottom_toTopOf="@id/btnOpenSingleTask"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnOpenStandard2"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scrollShower" />
+
+    <Button
+        android:id="@+id/btnOpenStandard2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="STANDARD 2"
+        app:layout_constraintBottom_toBottomOf="@id/btnOpenStandard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnOpenStandard"
+        app:layout_constraintTop_toTopOf="@id/btnOpenStandard" />
 
     <Button
         android:id="@+id/btnOpenSingleTask"

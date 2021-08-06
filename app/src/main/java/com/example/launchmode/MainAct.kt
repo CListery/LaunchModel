@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModelProvider
 import com.example.launchmode.databinding.ActMainBinding
@@ -24,60 +23,67 @@ open class MainAct : BaseAct<ActMainBinding>() {
         supportActionBar?.title = "${TAG}[${mActID}]"
 
         btnOpenStandard.setOnClickListener {
-            Log.w("${TAG}[${mActID}]", "Open Standard")
+            log("${TAG}[${mActID}]: Open Standard")
             startActivity(Intent(mCtx, StandardAct::class.java))
         }
         btnOpenSingleTask.setOnClickListener {
-            Log.w("${TAG}[${mActID}]", "Open SingleTask")
+            log("${TAG}[${mActID}]: Open SingleTask")
             startActivity(Intent(mCtx, SingleTaskAct::class.java))
         }
         btnOpenSingleTop.setOnClickListener {
-            Log.w("${TAG}[${mActID}]", "Open SingleTop")
+            log("${TAG}[${mActID}]: Open SingleTop")
             startActivity(Intent(mCtx, SingleTopAct::class.java))
         }
         btnOpenSingleInstance.setOnClickListener {
-            Log.w("${TAG}[${mActID}]", "Open SingleInstance")
+            log("${TAG}[${mActID}]: Open SingleInstance")
             startActivity(Intent(mCtx, SingleInstanceAct::class.java))
         }
         btnOpenSingleTask2.setOnClickListener {
-            Log.w("${TAG}[${mActID}]", "Open SingleTask 2")
+            log("${TAG}[${mActID}]: Open SingleTask 2")
             startActivity(Intent(mCtx, SingleTaskAct2::class.java))
         }
         btnOpenSingleTop2.setOnClickListener {
-            Log.w("${TAG}[${mActID}]", "Open SingleTop 2")
+            log("${TAG}[${mActID}]: Open SingleTop 2")
             startActivity(Intent(mCtx, SingleTopAct2::class.java))
         }
         btnOpenSingleInstance2.setOnClickListener {
-            Log.w("${TAG}[${mActID}]", "Open SingleInstance 2")
+            log("${TAG}[${mActID}]: Open SingleInstance 2")
             startActivity(Intent(mCtx, SingleInstanceAct2::class.java))
         }
         btnMoveTaskToBackYES.setOnClickListener {
             // 将包含此活动的任务移到活动堆栈的后面。 任务内的活动顺序不变
-            Log.w(
-                "${TAG}[${mActID}]",
-                "moveTaskToBack[${isTaskRoot}]: YES -> ${moveTaskToBack(true)}"
-            )
+            val result = moveTaskToBack(true)
+            Log.w("${TAG}[${mActID}]", "moveTaskToBack[${isTaskRoot}]: YES -> $result")
         }
         btnMoveTaskToBackNO.setOnClickListener {
             // 将包含此根节点的任务栈移到活动堆栈的后面，任务内的活动顺序不变
-            Log.w(
-                "${TAG}[${mActID}]",
-                "moveTaskToBack[${isTaskRoot}]: NO -> ${moveTaskToBack(false)}"
-            )
+            val result = moveTaskToBack(false)
+            Log.w("${TAG}[${mActID}]", "moveTaskToBack[${isTaskRoot}]: NO -> $result")
         }
-        btnLoadAppTaskInfo.setOnClickListener {
+        btnLoadTopActInfo.setOnClickListener {
             val activityManager = mCtx.getSystemService<ActivityManager>()
             val appTask = activityManager?.appTasks?.filterNotNull()?.find {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     it.taskInfo.taskId == taskId
                 } else {
+                    @Suppress("DEPRECATION")
                     it.taskInfo.id == taskId
                 }
             }
-            Log.w("${TAG}[${mActID}]", "AppTask -> $appTask")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                log("${TAG}[${mActID}]: ${appTask?.taskInfo?.topActivity}")
+            } else {
+                @Suppress("DEPRECATION")
+                log(
+                    "${TAG}[${mActID}]: ${
+                        activityManager?.getRunningTasks(Integer.MAX_VALUE)
+                            ?.find { it.id == appTask?.taskInfo?.id }?.topActivity
+                    }"
+                )
+            }
         }
         btnClose.setOnClickListener {
-            Log.w("${TAG}[${mActID}]", "Close")
+            log("${TAG}[${mActID}]: Close")
             finish()
         }
         log("${TAG}[${mActID}]: onCreate")
@@ -124,10 +130,6 @@ open class MainAct : BaseAct<ActMainBinding>() {
     private fun log(txt: String) {
         logViewModel.logInfo.append(txt)
     }
-}
-
-private fun TextView.line(txt: String) {
-    append(txt.plus("\n"))
 }
 
 /**
