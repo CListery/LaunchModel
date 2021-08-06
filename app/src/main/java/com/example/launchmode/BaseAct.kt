@@ -69,37 +69,6 @@ abstract class BaseAct<VB : ViewBinding> : AppCompatActivity() {
         }
         return true
     }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        Log.d("${TAG}[${mActID}]", "onNewIntent")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("${TAG}[${mActID}]", "onStart")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("${TAG}[${mActID}]", "onRestart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("${TAG}[${mActID}]", "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("${TAG}[${mActID}]", "onPause")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("${TAG}[${mActID}]", "onDestroy")
-    }
-
 }
 
 private val Any.memoryId
