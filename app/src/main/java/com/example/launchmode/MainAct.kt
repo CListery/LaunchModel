@@ -18,36 +18,36 @@ open class MainAct : BaseAct<ActMainBinding>() {
     }
 
     override fun ActMainBinding.onInit(savedInstanceState: Bundle?) {
-        logViewModel = ViewModelProvider(mAct).get("log", LogViewModel::class.java)
+        logViewModel = ViewModelProvider(mAct).get(LogViewModel::class.java)
 
-        supportActionBar?.title = "${TAG}[${mActID}]"
+        supportActionBar?.title = TAG
 
         btnOpenStandard.setOnClickListener {
-            log("${TAG}[${mActID}]: Open Standard")
+            log("Open Standard")
             startActivity(Intent(mCtx, StandardAct::class.java))
         }
         btnOpenSingleTask.setOnClickListener {
-            log("${TAG}[${mActID}]: Open SingleTask")
+            log("Open SingleTask")
             startActivity(Intent(mCtx, SingleTaskAct::class.java))
         }
         btnOpenSingleTop.setOnClickListener {
-            log("${TAG}[${mActID}]: Open SingleTop")
+            log("Open SingleTop")
             startActivity(Intent(mCtx, SingleTopAct::class.java))
         }
         btnOpenSingleInstance.setOnClickListener {
-            log("${TAG}[${mActID}]: Open SingleInstance")
+            log("Open SingleInstance")
             startActivity(Intent(mCtx, SingleInstanceAct::class.java))
         }
         btnOpenSingleTask2.setOnClickListener {
-            log("${TAG}[${mActID}]: Open SingleTask 2")
+            log("Open SingleTask 2")
             startActivity(Intent(mCtx, SingleTaskAct2::class.java))
         }
         btnOpenSingleTop2.setOnClickListener {
-            log("${TAG}[${mActID}]: Open SingleTop 2")
+            log("Open SingleTop 2")
             startActivity(Intent(mCtx, SingleTopAct2::class.java))
         }
         btnOpenSingleInstance2.setOnClickListener {
-            log("${TAG}[${mActID}]: Open SingleInstance 2")
+            log("Open SingleInstance 2")
             startActivity(Intent(mCtx, SingleInstanceAct2::class.java))
         }
         btnMoveTaskToBackYES.setOnClickListener {
@@ -71,7 +71,7 @@ open class MainAct : BaseAct<ActMainBinding>() {
                 }
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                log("${TAG}[${mActID}]: ${appTask?.taskInfo?.topActivity}")
+                log("${appTask?.taskInfo?.topActivity}")
             } else {
                 @Suppress("DEPRECATION")
                 log(
@@ -83,52 +83,51 @@ open class MainAct : BaseAct<ActMainBinding>() {
             }
         }
         btnClose.setOnClickListener {
-            log("${TAG}[${mActID}]: Close")
+            log("Close")
             finish()
         }
-        log("${TAG}[${mActID}]: onCreate")
+        log("onCreate")
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        log("${TAG}[${mActID}]: onNewIntent")
+        log("onNewIntent")
     }
 
     override fun onStart() {
         super.onStart()
-        log("${TAG}[${mActID}]: onStart")
+        log("onStart")
     }
 
     override fun onRestart() {
         super.onRestart()
-        log("${TAG}[${mActID}]: onRestart")
+        log("onRestart")
     }
 
     override fun onResume() {
         super.onResume()
         logViewModel.logInfo.observe(mAct, {
-            Log.d("${TAG}[${mActID}]", "observe: ${it.logs}")
             changeBinder {
                 txtShower.text = it.logs.joinToString("\n")
                 txtShower.post { scrollShower.scrollY = txtShower.height }
             }
         })
-        log("${TAG}[${mActID}]: onResume")
+        log("onResume")
     }
 
     override fun onPause() {
-        log("${TAG}[${mActID}]: onPause")
+        log("onPause")
         logViewModel.logInfo.removeObservers(mAct)
         super.onPause()
     }
 
     override fun onDestroy() {
-        log("${TAG}[$mActID]: onDestroy")
+        log("onDestroy")
         super.onDestroy()
     }
 
     private fun log(txt: String) {
-        logViewModel.logInfo.append(txt)
+        logViewModel.logInfo.append("$TAG: $txt")
     }
 }
 

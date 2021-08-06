@@ -1,18 +1,16 @@
 package com.example.launchmode
 
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseAct<VB : ViewBinding> : AppCompatActivity() {
 
-    protected val TAG by lazy { this::class.java.simpleName }
+    protected val TAG by lazy { "${this::class.java.simpleName}[$mActID]" }
 
     abstract fun binderCreator(savedInstanceState: Bundle?): VB?
 
@@ -28,8 +26,6 @@ abstract class BaseAct<VB : ViewBinding> : AppCompatActivity() {
     protected val mActID by lazy { mAct.memoryId }
 
     final override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("${TAG}[${mActID}]", "onCreate")
-
         beforeCreate(savedInstanceState)
         super.onCreate(savedInstanceState)
 
