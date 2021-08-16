@@ -20,9 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".StandardAct"
+            android:launchMode="standard" />
+        <activity
+            android:name=".StandardAct2"
+            android:process=":p1"
             android:launchMode="standard" />
         <activity
             android:name=".SingleTaskAct"
@@ -40,12 +43,12 @@
             android:name=".SingleInstanceAct"
             android:autoRemoveFromRecents="true"
             android:launchMode="singleInstance"
-            android:taskAffinity=":one" />
+            android:taskAffinity=".one" />
         <activity
             android:name=".SingleInstanceAct2"
             android:autoRemoveFromRecents="true"
             android:launchMode="singleInstance"
-            android:taskAffinity=":one2" />
+            android:taskAffinity=".one2" />
     </application>
 
 </manifest>

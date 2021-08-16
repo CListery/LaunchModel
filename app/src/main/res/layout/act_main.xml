@@ -14,16 +14,16 @@
         android:layout_marginBottom="20dp"
         android:text="CLOSE"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnLoadTopActInfo"
+        app:layout_constraintEnd_toStartOf="@id/btnLoadActInfo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1" />
 
     <Button
-        android:id="@+id/btnLoadTopActInfo"
+        android:id="@+id/btnLoadActInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TOP ACT"
+        android:text="ACT INFO"
         app:layout_constraintBottom_toBottomOf="@id/btnClose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnClose"
@@ -71,7 +71,7 @@
         android:id="@+id/btnOpenStandard2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="STANDARD 2"
+        android:text="STANDARD 2\n(process='.p1')"
         app:layout_constraintBottom_toBottomOf="@id/btnOpenStandard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnOpenStandard"
@@ -178,5 +178,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnMoveTaskToBackYES"
         app:layout_constraintTop_toTopOf="@id/txtMoveTaskToBack" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnSendCrash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.7"
+        android:backgroundTint="#FF0"
+        android:contentDescription="send crash"
+        android:src="@android:drawable/stat_notify_error"
+        app:backgroundTint="#D2FF0051"
+        app:borderWidth="1dp"
+        app:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01"
+        app:tint="#F00" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseAct<VB : ViewBinding> : AppCompatActivity() {
 
-    protected val TAG by lazy { "${this::class.java.simpleName}[$mActID]" }
+    protected val TAG by lazy { "${this::class.java.simpleName}[$mActID] TID:${taskId}" }
 
     abstract fun binderCreator(savedInstanceState: Bundle?): VB?
 

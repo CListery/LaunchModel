@@ -1,22 +1,42 @@
 package com.example.launchmode
 
 import android.app.Application
-import com.squareup.leakcanary.LeakCanary
+import android.os.StrictMode
+import android.util.Log
+import com.yh.actmanager.ActManager
+import com.yh.appinject.IBaseAppInject
+import com.yh.appinject.logger.LogsManager
+import com.yh.appinject.logger.logD
 
-class APP : Application() {
+class APP : Application(), IBaseAppInject {
 
     override fun onCreate() {
         super.onCreate()
 
-        initLeakCanary()
+        LogsManager.get().setDefLoggerConfig(appConfig = (true to Log.VERBOSE))
+        logD("onCreate")
 
+        ActManager.get().apply {
+            loggerConfig(true to Log.VERBOSE)
+            register(this@APP)
+            enableForcedStackTopMode(true)
+        }
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .permitDiskReads()
+                .penaltyLog()
+                .penaltyDeath()
+                .build()
+        )
     }
 
-    private fun initLeakCanary() {
-        if(LeakCanary.isInAnalyzerProcess(this)){
-            return
-        }
-        LeakCanary.install(this)
+    override fun getApplication() = this
+
+    override fun getNotificationIcon() = R.mipmap.ic_launcher
+
+    override fun showTipMsg(msg: String) {
+
     }
 
 }

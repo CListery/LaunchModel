@@ -2,6 +2,7 @@ package com.example.launchmode
 
 import android.app.ActivityManager
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +10,9 @@ import android.util.Log
 import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModelProvider
 import com.example.launchmode.databinding.ActMainBinding
+import com.yh.actmanager.ActManager
+import com.yh.appinject.ext.memoryId
+import com.yh.appinject.logger.logD
 
 open class MainAct : BaseAct<ActMainBinding>() {
 
@@ -26,6 +30,10 @@ open class MainAct : BaseAct<ActMainBinding>() {
         btnOpenStandard.setOnClickListener {
             log("Open Standard")
             startActivity(Intent(mCtx, StandardAct::class.java))
+        }
+        btnOpenStandard2.setOnClickListener {
+            log("Open Standard 2")
+            startActivity(Intent(mCtx, StandardAct2::class.java))
         }
         btnOpenSingleTask.setOnClickListener {
             log("Open SingleTask")
@@ -61,7 +69,19 @@ open class MainAct : BaseAct<ActMainBinding>() {
             val result = moveTaskToBack(false)
             Log.w("${TAG}[${mActID}]", "moveTaskToBack[${isTaskRoot}]: NO -> $result")
         }
-        btnLoadTopActInfo.setOnClickListener {
+        btnLoadActInfo.setOnClickListener {
+            val packageInfo =
+                packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            logD(packageInfo.activities.joinToString("\n--------------------------------------------\n") {
+                listOf(
+                    it.name,
+                    "    packageName = ${it.packageName}",
+                    "    launchMode = ${it.launchMode}",
+                    "    targetActivity = ${it.targetActivity}",
+                    "    processName = ${it.processName}",
+                    "    taskAffinity = ${it.taskAffinity}",
+                ).joinToString("\n")
+            })
             val activityManager = mCtx.getSystemService<ActivityManager>()
             val appTask = activityManager?.appTasks?.filterNotNull()?.find {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -72,20 +92,36 @@ open class MainAct : BaseAct<ActMainBinding>() {
                 }
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                log("${appTask?.taskInfo?.topActivity}")
+                log("TOP: ${appTask?.taskInfo?.topActivity}")
             } else {
                 @Suppress("DEPRECATION")
                 log(
-                    "${TAG}[${mActID}]: ${
+                    "TOP: ${TAG}[${mActID}]: ${
                         activityManager?.getRunningTasks(Integer.MAX_VALUE)
                             ?.find { it.id == appTask?.taskInfo?.id }?.topActivity
                     }"
                 )
             }
+            log("TOP: ${ActManager.get().topAct.memoryId}")
         }
         btnClose.setOnClickListener {
             log("Close")
-            finish()
+            ActManager.get().finishForceGoBack(mAct)
+//            if (mAct is SingleInstanceAct || mAct is SingleInstanceAct2) {
+//                ActManager.get().finishAndOpenPreTask(mAct)
+//            } else {
+//                finish()
+//            }
+        }
+        btnSendCrash.setOnClickListener {
+//            if(mAct !is StandardAct2) {
+//                try {
+//                    throw NullPointerException("")
+//                } finally {
+//                    startActivity(Intent(mCtx, StandardAct2::class.java))
+//                }
+//            }
+            ActManager.get().killAll()
         }
         log("onCreate")
     }
@@ -146,6 +182,7 @@ open class MainAct : BaseAct<ActMainBinding>() {
  * ### 普通模式
  */
 class StandardAct : MainAct()
+class StandardAct2 : MainAct()
 
 /**
  * ### 单例回滚栈顶模式

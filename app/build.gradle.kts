@@ -44,14 +44,20 @@ dependencies {
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("com.google.android.material:material:1.3.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+
+    implementation("io.github.clistery:appinject:1.4.3")
+    implementation("io.github.clistery:actmanager:1.2.2")
+
     // leakcanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:1.5.4")
-    releaseImplementation("com.squareup.leakcanary:leakcanary-android-no-op:1.5.4")
-    testImplementation("com.squareup.leakcanary:leakcanary-android-no-op:1.5.4")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.7")
+    releaseImplementation("com.squareup.leakcanary:leakcanary-android-release:2.7")
+    // Optional
+    releaseImplementation("com.squareup.leakcanary:leakcanary-object-watcher-android:2.7")
 }
